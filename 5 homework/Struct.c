@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <malloc.h>
+
+#define one 1
 
 typedef struct
 {
@@ -16,8 +20,13 @@ int main(void)
     int temp_number;
     unsigned int i;
     unsigned int flag = 0;
+    int size = 5;
+    int null = 0;
 
-    phonebook record[10];
+    struct test *ptr;
+    ptr = malloc(one * sizeof(phonebook));
+
+    phonebook record[size];
     strcpy(record[0].name, "Denis");
     record[0].number = 132456;
 
@@ -41,7 +50,7 @@ int main(void)
         switch (selection)
         {
         case 1:
-            for (i = 0; i < 5; i++)
+            for (i = 0; i < size; i++)
             {
                 printf("\nName - %-11s number - %d\n", record[i].name, record[i].number);
             }
@@ -49,7 +58,7 @@ int main(void)
         case 2:
             printf("\nEnter name: \n");
             scanf("%s", temp_name);
-            for (i = 0; i < 5; i++)
+            for (i = 0; i < size; i++)
             {
                 if (strcmp(record[i].name, temp_name) == 0)
                 {
@@ -61,26 +70,32 @@ int main(void)
                 printf("\nRecord is not found\n");
             break;
         case 3:
-            printf("\nEnter number of record from 1 to 5 to delete: \n");
+            printf("\nEnter number of record from 1 to %d to delete: \n", size);
             scanf("%d", &temp_number);
             printf("\nWill be deleted: %s - %d\n", record[temp_number - 1].name, record[temp_number - 1].number);
-            for (i = 0; i < 5; i++)
+            for (i = 0; i < 10; i++)
             {
                 record[temp_number - 1].name[i] = '0';
             }
             record[temp_number - 1].number = 0;
+
             break;
         case 4:
-            printf("\nEnter number of record from 1 to 5 to modify: \n");
+            if (true)
+            {
+                null++;
+                ptr = realloc(ptr, (null + 1) * sizeof(phonebook));
+            }
+            printf("\nEnter number of record from 1 to %d to modify: \n", size + 1);
             scanf("%d", &i);
-            printf("\nRecord will be modifed: %s - %d\n", record[i-1].name, record[i-1].number);
             printf("\nEnter new name for record (length 1-10): \n");
             scanf("%s", temp_name);
             printf("\nEnter new phone number (length 6): \n");
             scanf("%d", &temp_number);
-            strcpy(record[i-1].name, temp_name);
-            record[i-1].number = temp_number;
-            printf("\nNew record: %s - %d\n", record[i-1].name, record[i-1].number);
+            strcpy(record[i - 1].name, temp_name);
+            record[i - 1].number = temp_number;
+            printf("\nNew record: %s - %d\n", record[i - 1].name, record[i - 1].number);
+            size++;
             break;
         case 5:
             still_works = false;
@@ -90,4 +105,6 @@ int main(void)
             break;
         }
     }
+    free(ptr);
+    return 0;
 }
