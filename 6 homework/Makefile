@@ -1,5 +1,5 @@
 BIN	 := main
-SOURCES := calc.c
+SOURCES := calc.c division.c multiplication.c subtraction.c addition.c  
 HEADERS := computation.h
 
 $(BIN) : $(SOURCES)
