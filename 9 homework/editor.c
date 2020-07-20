@@ -5,8 +5,6 @@
 #include <ncurses.h>
 #include <string.h>
 
-#define msleep(msec) usleep(msec * 1000)
-
 void sig_winch(int signo)
 {
     struct winsize size;
@@ -37,15 +35,8 @@ int main()
     while (fgets(load_string_out, 250, file) != NULL)
     {
         wprintw(wnd, "%s\n", load_string_out);
-    }
-    // wmove(wnd, 10, 5);
-    // wprintw(wnd, "hello!\n");
-    // while ((fgets(load_string_in, 250, file) != NULL))
-    // {
-    //     wprintw(wnd, "hello!\n");
-    // }
-    // scanw("%d", &a   
-    wgetstr(wnd, load_string_in);   //Считывает стоку
+    } 
+    wgetstr(wnd, load_string_in);   
     wrefresh(wnd);
     load_string_in[strlen(load_string_in)] = '\n';
     fputs(load_string_in, file);
