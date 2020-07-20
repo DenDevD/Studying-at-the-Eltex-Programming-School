@@ -17,7 +17,6 @@ int main()
     initscr();
     int i;
     WINDOW *wnd;
-    WINDOW *subwnd;
     FILE *file;
     char *file_name = "text.txt";
     char load_string_out[250];
@@ -40,7 +39,6 @@ int main()
     wrefresh(wnd);
     load_string_in[strlen(load_string_in)] = '\n';
     fputs(load_string_in, file);
-    // wrefresh(wnd);
     delwin(wnd);
     refresh();
     getch();
